@@ -16,14 +16,6 @@ let orb;
 const orbGeometry = new THREE.SphereGeometry(0.5, 32, 32);
 const orbMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
-// Crosshair setup
-const crosshair = new THREE.Mesh(
-    new THREE.RingGeometry(0.02, 0.04, 32),
-    new THREE.MeshBasicMaterial({ color: 0xffffff })
-);
-crosshair.position.z = -2;
-camera.add(crosshair);
-
 // Position the camera inside the room
 camera.position.z = 15;  // Adjusted camera position for better visibility
 
@@ -122,10 +114,6 @@ document.getElementById('orbColor').addEventListener('input', (event) => {
     orbMaterial.color.set(event.target.value);
 });
 
-document.getElementById('crosshairColor').addEventListener('input', (event) => {
-    crosshair.material.color.set(event.target.value);
-});
-
 // Handle orb texture upload
 const orbTextureInput = document.getElementById('orbTextureInput');
 orbTextureInput.addEventListener('change', (event) => {
@@ -192,12 +180,6 @@ function removeBackgroundImage() {
     roomMaterial.needsUpdate = true;
 }
 
-// Update accuracy display function
-function updateAccuracyDisplay() {
-    const accuracyDisplay = document.getElementById('accuracyDisplay');
-    accuracyDisplay.innerText = `${successfulHits} / ${totalClicks}`;
-}
-
 // Apply orb texture
 function applyOrbTexture(textureData) {
     const loader = new THREE.TextureLoader();
@@ -212,6 +194,14 @@ function removeOrbTexture() {
     orbMaterial.map = null;
     orbMaterial.needsUpdate = true;
 }
+
+// Settings pop-up logic
+const settingsPopup = document.getElementById('settingsPopup');
+const settingsButton = document.getElementById('settingsButton');
+
+settingsButton.addEventListener('click', () => {
+    settingsPopup.style.display = (settingsPopup.style.display === 'block') ? 'none' : 'block';
+});
 
 // Animation loop
 function animate() {
