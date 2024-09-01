@@ -16,6 +16,14 @@ let orb;
 const orbGeometry = new THREE.SphereGeometry(0.5, 32, 32);
 const orbMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
+// Load the destruction sound
+const destroySound = new Audio('destroy.mp3');
+
+// Function to play the sound
+function playDestroySound() {
+    destroySound.play();
+}
+
 // Position the camera inside the room
 camera.position.z = 15;  // Adjusted camera position for better visibility
 
@@ -57,6 +65,7 @@ function onMouseClick(event) {
     const intersects = raycaster.intersectObject(orb);
     if (intersects.length > 0) {
         successfulHits++;
+        playDestroySound();  // Play the sound on orb destruction
         spawnOrb();
     }
 
