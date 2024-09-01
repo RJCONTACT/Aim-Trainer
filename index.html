@@ -16,15 +16,12 @@
             font-size: 24px; /* Big font size */
             text-align: center;
         }
-        #color-controls, #timer-controls {
+        #timer-controls {
             position: absolute;
             top: 50px;
             left: 10px;
             z-index: 100;
             color: white;
-        }
-        #color-controls {
-            margin-bottom: 20px; /* Spacing between controls */
         }
         #timer-controls {
             top: 250px; /* Adjusted to avoid overlap */
@@ -41,14 +38,42 @@
             font-size: 18px;
             cursor: pointer;
         }
+        /* Pop-up styling */
+        #settingsPopup {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            background-color: #333;
+            padding: 20px;
+            border: 1px solid #fff;
+            z-index: 200;
+            color: white;
+        }
+        #settingsButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            color: white;
+            background-color: #444;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div id="accuracyDisplay">0 / 0</div>
-    <div id="color-controls">
+    
+    <!-- Settings Button -->
+    <button id="settingsButton">Settings</button>
+    
+    <!-- Pop-up for Settings -->
+    <div id="settingsPopup">
         <label>Room Color: <input type="color" id="roomColor" value="#0000ff"></label>
         <label>Orb Color: <input type="color" id="orbColor" value="#ff0000"></label>
-        <label>Crosshair Color: <input type="color" id="crosshairColor" value="#ffffff"></label>
         <label>Background Image: 
             <input type="file" id="bgImageInput" accept="image/*">
             <button id="removeBgImageButton" class="remove-button">X</button>
@@ -58,6 +83,7 @@
             <button id="removeOrbTextureButton" class="remove-button">X</button>
         </label>
     </div>
+
     <div id="timer-controls">
         <label>Set Timer (seconds): <input type="number" id="timerInput" value="30" min="1"></label>
         <button id="startButton">Start Game</button>
